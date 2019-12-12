@@ -66,41 +66,43 @@ public final class TreeboTimed extends JavaPlugin {
                 return name.endsWith(".scm");
             }
         });
-        int totalFiles = files.length;
-        int count = 1;
-        long timespan = getConfig().getInt("totalInterval") * 20 * 60;
-        if (totalFiles > 0) {
-            long interval = timespan / totalFiles;
-            for (File schematic : files) {
-                System.out.println("Scheduling pasting schematic - " + schematic.getName().replace(".scm", "") + " - in " + interval * count + " ticks, repeating every " + timespan + " ticks");
-                Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
-                    @Override
-                    public void run() {
-                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "pasteatorigin " + schematic.getAbsolutePath().replace(".scm", ""));
-                    }
-                }, (interval * count), timespan);
-                count++;
+        if (files != null) {
+            int totalFiles = files.length;
+            int count = 1;
+            long timespan = getConfig().getInt("totalInterval") * 20 * 60;
+            if (totalFiles > 0) {
+                long interval = timespan / totalFiles;
+                for (File schematic : files) {
+                    System.out.println("Scheduling pasting schematic - " + schematic.getName().replace(".scm", "") + " - in " + interval * count + " ticks, repeating every " + timespan + " ticks");
+                    Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
+                        @Override
+                        public void run() {
+                            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "pasteatorigin " + schematic.getAbsolutePath().replace(".scm", ""));
+                        }
+                    }, (interval * count), timespan);
+                    count++;
 
-                Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
-                    @Override
-                    public void run() {
-                        for (Player p : Bukkit.getOnlinePlayers()) {
-                            int x, y, z = 0;
-                            FileConfiguration yaml = new YamlConfiguration().loadConfiguration(new File(schematic.getName().replace(".scm", ".yml")));
-                            x = yaml.getInt("X");
-                            y = yaml.getInt("Y");
-                            z = yaml.getInt("Z");
-                            if (p.getLocation().getBlockX() > (x - 50) && p.getLocation().getBlockX() < (x + 50)) {
-                                if (p.getLocation().getBlockZ() > (z - 50) && p.getLocation().getBlockZ() < (z + 50)) {
-                                    if (p.getLocation().getBlockY() > (y - 15) && p.getLocation().getBlockY() < (y + 50)) {
-                                        p.sendMessage(badge + " Resetting farm " + ChatColor.GOLD + schematic.getName().replace(".scm", "") + ChatColor.RESET + " in " + ChatColor.RED + ChatColor.BOLD + "ONE" + ChatColor.RESET + " Minute");
+                    Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
+                        @Override
+                        public void run() {
+                            for (Player p : Bukkit.getOnlinePlayers()) {
+                                int x, y, z = 0;
+                                FileConfiguration yaml = new YamlConfiguration().loadConfiguration(new File(schematic.getName().replace(".scm", ".yml")));
+                                x = yaml.getInt("X");
+                                y = yaml.getInt("Y");
+                                z = yaml.getInt("Z");
+                                if (p.getLocation().getBlockX() > (x - 50) && p.getLocation().getBlockX() < (x + 50)) {
+                                    if (p.getLocation().getBlockZ() > (z - 50) && p.getLocation().getBlockZ() < (z + 50)) {
+                                        if (p.getLocation().getBlockY() > (y - 15) && p.getLocation().getBlockY() < (y + 50)) {
+                                            p.sendMessage(badge + " Resetting farm " + ChatColor.GOLD + schematic.getName().replace(".scm", "") + ChatColor.RESET + " in " + ChatColor.RED + ChatColor.BOLD + "ONE" + ChatColor.RESET + " Minute");
+                                        }
                                     }
                                 }
                             }
+                            //Bukkit.broadcastMessage(badge + " Resetting farm " + ChatColor.GOLD + schematic.getName().replace(".scm", "") + ChatColor.RESET + " in " + ChatColor.RED + ChatColor.BOLD + "ONE" + ChatColor.RESET + " Minute");
                         }
-                        //Bukkit.broadcastMessage(badge + " Resetting farm " + ChatColor.GOLD + schematic.getName().replace(".scm", "") + ChatColor.RESET + " in " + ChatColor.RED + ChatColor.BOLD + "ONE" + ChatColor.RESET + " Minute");
-                    }
-                }, (interval * count) - 1200, timespan);
+                    }, (interval * count) - 1200, timespan);
+                }
             }
         }
     }
