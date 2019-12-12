@@ -1,0 +1,44 @@
+name: TreeboTimed
+version: ${project.version}
+main: me.shakeforprotein.treebotimed.TreeboTimed
+api-version: 1.15
+authors: [ShakeforProtein]
+depend: [WorldEdit, WorldGuard]
+
+permissions:
+  treebotimed.doit:
+    default: op
+  treebotimed.admin:
+    default: false
+  treebotimed.giveblueprint:
+    description: Allows the use of giveBluprint command
+    default: false
+
+commands:
+  giveblueprint:
+    description: Gives player a blueprint with specified name.
+    usage: <command> <player> <blueprint>
+    permission: treebotimed.giveblueprint
+  reload:
+    description:
+    usage:
+    permission: treebotimed.admin
+  pasteatorigin:
+    description: ''
+    usage: ''
+    permission: treebotimed.admin
+  copyfromorigin:
+    description: ''
+    usage: ''
+    permission: treebotimed.admin
+  copystone:
+    description: 'Locates all stone in a selection and saves coordinates for an ore generators'
+    usage: 'Make selection with /tpos1 and /tpos 2 then run /copystone <filename>, to save stone locations'
+  tpos1:
+    description: 'Sets selection corner 1'
+    usage: ''
+    permission: treebotimed.admin
+  tpos2:
+    description: 'Sets selection corner 2'
+    usage: ''
+    permission: treebotimed.admin

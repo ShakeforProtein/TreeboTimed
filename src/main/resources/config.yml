@@ -1,0 +1,16 @@
+automaticPasting: true
+totalInterval: 30
+stoneRegenModifier: 40
+badge: '&3&l[&2Treebo Timed&3&l]&r'
+oreWeights:
+  EMERALD_ORE: 100
+  DIAMOND_ORE: 300
+  GOLD_ORE: 1200
+  IRON_ORE: 4000
+  COAL_ORE: 5600
+  REDSTONE_ORE: 600
+  LAPIS_ORE: 400
+  GLOWSTONE: 300
+  NETHER_QUARTZ_ORE: 400
+  OAK_LOG: 100
+growSolidPercent: 1
