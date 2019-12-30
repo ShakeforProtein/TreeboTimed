@@ -1,7 +1,7 @@
 name: TreeboTimed
 version: ${project.version}
 main: me.shakeforprotein.treebotimed.TreeboTimed
-api-version: 1.15
+api-version: 1.13
 authors: [ShakeforProtein]
 depend: [WorldEdit, WorldGuard]
 
@@ -9,10 +9,10 @@ permissions:
   treebotimed.doit:
     default: op
   treebotimed.admin:
-    default: false
+    default: op
   treebotimed.giveblueprint:
     description: Allows the use of giveBluprint command
-    default: false
+    default: op
 
 commands:
   giveblueprint:

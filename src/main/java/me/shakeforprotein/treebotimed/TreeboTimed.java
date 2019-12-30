@@ -3,6 +3,7 @@ package me.shakeforprotein.treebotimed;
 import com.sk89q.worldedit.WorldEdit;
 import me.shakeforprotein.treebotimed.Commands.*;
 import me.shakeforprotein.treebotimed.Listeners.PlaceSchem;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -44,11 +45,17 @@ public final class TreeboTimed extends JavaPlugin {
         this.getCommand("giveblueprint").setExecutor(new GiveBlueprint(this));
         this.getCommand("copyStone").setExecutor(new CopyStone());
         Bukkit.getPluginManager().registerEvents(new PlaceSchem(this), this);
-        setStoneQue();
+        if(getConfig().getBoolean("allowGenerateOres")) {
+            setStoneQue();
+        }
         if (getConfig().getBoolean("automaticPasting")) {
             setSchedule();
         }
-
+        if(getConfig().get("bstatsIntegration") != null) {
+            if (getConfig().getBoolean("bstatsIntegration")) {
+                Metrics metrics = new Metrics(this);
+            }
+        }
     }
 
     @Override
@@ -77,7 +84,8 @@ public final class TreeboTimed extends JavaPlugin {
                     Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
                         @Override
                         public void run() {
-                            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "pasteatorigin " + schematic.getAbsolutePath().replace(".scm", ""));
+                            //System.out.println(schematic.getAbsolutePath().replace(".scm", ""));
+                            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "pasteatorigin " + schematic.getName().replace(".scm", ""));
                         }
                     }, (interval * count), timespan);
                     count++;
@@ -94,7 +102,7 @@ public final class TreeboTimed extends JavaPlugin {
                                 if (p.getLocation().getBlockX() > (x - 50) && p.getLocation().getBlockX() < (x + 50)) {
                                     if (p.getLocation().getBlockZ() > (z - 50) && p.getLocation().getBlockZ() < (z + 50)) {
                                         if (p.getLocation().getBlockY() > (y - 15) && p.getLocation().getBlockY() < (y + 50)) {
-                                            p.sendMessage(badge + " Resetting farm " + ChatColor.GOLD + schematic.getName().replace(".scm", "") + ChatColor.RESET + " in " + ChatColor.RED + ChatColor.BOLD + "ONE" + ChatColor.RESET + " Minute");
+                                            //p.sendMessage(badge + " Resetting farm " + ChatColor.GOLD + schematic.getName().replace(".scm", "") + ChatColor.RESET + " in " + ChatColor.RED + ChatColor.BOLD + "ONE" + ChatColor.RESET + " Minute");
                                         }
                                     }
                                 }

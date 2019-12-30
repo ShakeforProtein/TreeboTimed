@@ -1,6 +1,8 @@
 automaticPasting: true
+allowGenerateOres: false
 totalInterval: 30
 stoneRegenModifier: 40
+bstatsIntegration: true
 badge: '&3&l[&2Treebo Timed&3&l]&r'
 oreWeights:
   EMERALD_ORE: 100
