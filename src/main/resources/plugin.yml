@@ -34,6 +34,7 @@ commands:
   copystone:
     description: 'Locates all stone in a selection and saves coordinates for an ore generators'
     usage: 'Make selection with /tpos1 and /tpos 2 then run /copystone <filename>, to save stone locations'
+  CopyIslandFormat:
   tpos1:
     description: 'Sets selection corner 1'
     usage: ''

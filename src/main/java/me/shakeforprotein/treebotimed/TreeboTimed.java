@@ -44,6 +44,7 @@ public final class TreeboTimed extends JavaPlugin {
         this.getCommand("tpos2").setExecutor(new TPos2(this));
         this.getCommand("giveblueprint").setExecutor(new GiveBlueprint(this));
         this.getCommand("copyStone").setExecutor(new CopyStone());
+        this.getCommand("CopyIslandFormat").setExecutor(new CopyIslandFormat());
         Bukkit.getPluginManager().registerEvents(new PlaceSchem(this), this);
         if(getConfig().getBoolean("allowGenerateOres")) {
             setStoneQue();
@@ -73,7 +74,7 @@ public final class TreeboTimed extends JavaPlugin {
                 return name.endsWith(".scm");
             }
         });
-        if (files != null) {
+        if (files != null && files.length > 0) {
             int totalFiles = files.length;
             int count = 1;
             long timespan = getConfig().getInt("totalInterval") * 20 * 60;
