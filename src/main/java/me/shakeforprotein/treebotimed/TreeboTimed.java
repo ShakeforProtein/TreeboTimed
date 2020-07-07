@@ -3,7 +3,6 @@ package me.shakeforprotein.treebotimed;
 import com.sk89q.worldedit.WorldEdit;
 import me.shakeforprotein.treebotimed.Commands.*;
 import me.shakeforprotein.treebotimed.Listeners.PlaceSchem;
-import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -54,7 +53,7 @@ public final class TreeboTimed extends JavaPlugin {
         }
         if(getConfig().get("bstatsIntegration") != null) {
             if (getConfig().getBoolean("bstatsIntegration")) {
-                Metrics metrics = new Metrics(this);
+                //Metrics metrics = new Metrics(this);
             }
         }
     }
