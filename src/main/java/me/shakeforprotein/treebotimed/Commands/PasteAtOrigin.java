@@ -14,11 +14,9 @@ import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.session.ClipboardHolder;
 import me.shakeforprotein.treebotimed.TreeboTimed;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
+
 import org.bukkit.World;
-import org.bukkit.block.Block;
-import org.bukkit.block.data.BlockData;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

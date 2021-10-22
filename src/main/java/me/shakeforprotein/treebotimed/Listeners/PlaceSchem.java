@@ -13,11 +13,11 @@ import com.sk89q.worldedit.function.operation.Operations;
 import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.session.ClipboardHolder;
 import me.shakeforprotein.treebotimed.TreeboTimed;
-import net.minecraft.server.v1_16_R1.NBTTagCompound;
+import net.minecraft.nbt.NBTTagCompound;
 import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.craftbukkit.v1_16_R1.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_17_R1.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -44,7 +44,7 @@ public class PlaceSchem implements Listener {
             if (e.getItem() != null && (e.getItem().getType() == Material.PAPER || e.getItem().getType() == Material.FILLED_MAP)) {
                 if (e.getItem().hasItemMeta() && e.getItem().getItemMeta().hasDisplayName() && ChatColor.stripColor(e.getItem().getItemMeta().getDisplayName().toLowerCase()).startsWith("blueprint")) {
                     ItemStack blueprint = e.getItem();
-                    net.minecraft.server.v1_16_R1.ItemStack nmsBlueprint = getNMSItem(blueprint);
+                    net.minecraft.world.item.ItemStack nmsBlueprint = getNMSItem(blueprint);
                     NBTTagCompound nbtBlueprint = getCompound(nmsBlueprint);
                     if (nbtBlueprint.hasKey("ShakeBlueprint")) {
                         String scmName = nbtBlueprint.getString("ShakeBlueprint");
@@ -58,19 +58,14 @@ public class PlaceSchem implements Listener {
     }
 
 
-    public net.minecraft.server.v1_16_R1.ItemStack getNMSItem(ItemStack item) {
-        net.minecraft.server.v1_16_R1.ItemStack nmsItem = CraftItemStack.asNMSCopy(item);
+    public net.minecraft.world.item.ItemStack getNMSItem(ItemStack item) {
+        net.minecraft.world.item.ItemStack nmsItem = CraftItemStack.asNMSCopy(item);
         return nmsItem;
     }
 
-    public NBTTagCompound getCompound(net.minecraft.server.v1_16_R1.ItemStack nmsItem) {
+    public NBTTagCompound getCompound(net.minecraft.world.item.ItemStack nmsItem) {
         NBTTagCompound nmsCompound = (nmsItem.hasTag()) ? nmsItem.getTag() : new NBTTagCompound();
         return nmsCompound;
-    }
-
-    public ItemStack getBukkitItem(net.minecraft.server.v1_16_R1.ItemStack nmsItem) {
-        ItemStack bukkitItem = CraftItemStack.asBukkitCopy(nmsItem);
-        return bukkitItem;
     }
 
     public boolean placeAtPlayer(Player p, String nbtString) {
